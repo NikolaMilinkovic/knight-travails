@@ -18,19 +18,21 @@ function knightMoves(start, end) {
 
     // Start queue traversal
     while(queue.length > 0){
+        console.log('while running');
         let current = queue.shift();
 
         // Evaluate if the field we are currently at the field we are looking for
         // If true return the path we used to get there & break the method
         if (current.field[0] === end[0] && current.field[1] === end[1]){
-            console.log(current.path);
+            // console.log(current.path);
             foundPaths.push(current.path);
+            break;
         }
 
         // For each possible move calculate the next move
         // If the move is valid add it to queue and mark it as visited, if not return
         moves.forEach(move => {
-
+            console.log(`Current queue length: ${queue.length}`);
             // Next move calculation
             currentField = [current.field[0] + move[0], current.field[1] + move[1]];
 
@@ -39,9 +41,7 @@ function knightMoves(start, end) {
             if(evalInput(currentField) && !visited.has(currentField.toString())){
                 visited.add(currentField.toString());
                 queue.push({field: currentField, path: [...current.path, currentField]});
-            } else{
-                return;
-            }
+            } 
         });
     } 
     console.log(foundPaths);    
