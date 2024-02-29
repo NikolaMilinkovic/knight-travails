@@ -1,5 +1,7 @@
-function knightMoves(start, end) {
+export default function knightMoves(start, end) {
 
+    console.log(start)
+    console.log(end)
     // Validate user input
     if(!evalInput(start) || !evalInput(end)){
         return;
@@ -9,6 +11,7 @@ function knightMoves(start, end) {
     // In here we will input each field that we have visited thus
     // Removing possiblity of visition the same field multiple times
     const visited = new Set([start.toString()]);
+    let currentField;
     let foundPaths = [];
     let path = [start];
     let queue = [{field: start, path: path}];
@@ -18,13 +21,11 @@ function knightMoves(start, end) {
 
     // Start queue traversal
     while(queue.length > 0){
-        console.log('while running');
         let current = queue.shift();
 
         // Evaluate if the field we are currently at the field we are looking for
         // If true return the path we used to get there & break the method
         if (current.field[0] === end[0] && current.field[1] === end[1]){
-            // console.log(current.path);
             foundPaths.push(current.path);
             break;
         }
@@ -32,7 +33,7 @@ function knightMoves(start, end) {
         // For each possible move calculate the next move
         // If the move is valid add it to queue and mark it as visited, if not return
         moves.forEach(move => {
-            console.log(`Current queue length: ${queue.length}`);
+            console.log('running');
             // Next move calculation
             currentField = [current.field[0] + move[0], current.field[1] + move[1]];
 
@@ -44,7 +45,8 @@ function knightMoves(start, end) {
             } 
         });
     } 
-    console.log(foundPaths);    
+    console.log(foundPaths)
+    return foundPaths;  
 }
 
 // Method for evaluating the validity of input
@@ -59,8 +61,8 @@ function evalInput(fieldArr){
     return true;
 }
 
-knightMoves([0,0],[7,7]);
-knightMoves([0,0],[3,3]);
-knightMoves([3,3],[0,0]);
+// knightMoves([0,0],[7,7]);
+// knightMoves([0,0],[3,3]);
+// knightMoves([3,3],[0,0]);
 
 

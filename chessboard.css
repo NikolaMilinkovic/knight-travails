@@ -48,9 +48,10 @@ table {
 
 :root {
     --background-color: #121212;
-    --black-field: black;
+    --black-field: #5C6A72;
     --white-field: white;
-    --border-color: cyan;
+    --border-color: #2D353B;
+    --jump-color: #A7C080;
 }
 
 body {
@@ -75,7 +76,7 @@ body {
     height: 700px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    border: 3px solid var(--border-color);
+    border: 10px solid var(--border-color);
     position: relative;
 }
 .default-field{
@@ -107,4 +108,10 @@ body {
     position: absolute;
     width: 80px;
     height: 80px;
+}
+.jump-field{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    background-color: var(--jump-color) !important;
 }
