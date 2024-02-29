@@ -58,15 +58,11 @@ for(let y = 7; y >= 0; y--){
             if(draggedEl === knight){
                 knightX = event.target.getAttribute('x-cord');
                 knightY = event.target.getAttribute('y-cord');
-                console.log(`knight X is: ${knightX}`)
-                console.log(`knight Y is: ${knightY}`)
                 getPath();
             }
             if(draggedEl === flag){
                 flagX = event.target.getAttribute('x-cord');
                 flagY = event.target.getAttribute('y-cord');
-                console.log(`flag X is: ${flagX}`)
-                console.log(`flag Y is: ${flagY}`)
                 getPath();
             }
 
@@ -96,9 +92,8 @@ function getPath(){
     path = knightMoves([parseInt(knightX),parseInt(knightY)],[parseInt(flagX),parseInt(flagY)]);
 
     path.flat().forEach(cord => {
-        console.log(cord);
         if(cord[0] === parseInt(knightX) && cord[1] === parseInt(knightY)) return;
-        if (cord[0] === parseInt(flagX) && cord[1] === parseInt(flagY)) return
+        if(cord[0] === parseInt(flagX) && cord[1] === parseInt(flagY)) return
 
         const field = document.querySelector(`[y-cord="${cord[1]}"][x-cord="${cord[0]}"]`);
 

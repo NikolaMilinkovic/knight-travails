@@ -33,7 +33,6 @@ export default function knightMoves(start, end) {
         // For each possible move calculate the next move
         // If the move is valid add it to queue and mark it as visited, if not return
         moves.forEach(move => {
-            console.log('running');
             // Next move calculation
             currentField = [current.field[0] + move[0], current.field[1] + move[1]];
 
@@ -45,7 +44,6 @@ export default function knightMoves(start, end) {
             } 
         });
     } 
-    console.log(foundPaths)
     return foundPaths;  
 }
 
