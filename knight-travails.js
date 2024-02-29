@@ -9,6 +9,7 @@ function knightMoves(start, end) {
     // In here we will input each field that we have visited thus
     // Removing possiblity of visition the same field multiple times
     const visited = new Set([start.toString()]);
+    let foundPaths = [];
     let path = [start];
     let queue = [{field: start, path: path}];
     const moves = [
@@ -23,7 +24,7 @@ function knightMoves(start, end) {
         // If true return the path we used to get there & break the method
         if (current.field[0] === end[0] && current.field[1] === end[1]){
             console.log(current.path);
-            break;
+            foundPaths.push(current.path);
         }
 
         // For each possible move calculate the next move
