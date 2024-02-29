@@ -1,7 +1,5 @@
 export default function knightMoves(start, end) {
 
-    console.log(start)
-    console.log(end)
     // Validate user input
     if(!evalInput(start) || !evalInput(end)){
         return;

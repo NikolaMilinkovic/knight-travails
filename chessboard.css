@@ -96,6 +96,7 @@ body {
     background-color: var(--white-field);
 }
 #knight-div{
+    background-color: transparent;
     background-image: url(./img/knight-150x150px.svg);
     background-size: cover;
     position: absolute;
@@ -103,6 +104,7 @@ body {
     height: 80px;
 }
 #flag-div{
+    background-color: transparent;
     background-image: url(./img/flag.svg);
     background-size: cover;
     position: absolute;
