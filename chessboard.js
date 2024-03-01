@@ -27,7 +27,13 @@ flag.setAttribute('draggable', 'true');
 flag.addEventListener('dragstart', (event) => {
     draggedEl = event.target;
 })
+flag.addEventListener('touchstart', (event) => {
+    draggedEl = event.target;
+})
 flag.addEventListener('dragend', () => {
+    draggedEl = null;
+})
+flag.addEventListener('touchend', () => {
     draggedEl = null;
 })
 let field;
