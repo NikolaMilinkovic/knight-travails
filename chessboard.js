@@ -8,12 +8,7 @@ const knight = document.createElement('div');
 knight.setAttribute('id', 'knight-div');
 knight.classList.add('default-field');
 knight.setAttribute('draggable', 'true');
-knight.addEventListener('dragstart', (event) => {
-    draggedEl = event.target;
-})
-knight.addEventListener('dragend', () => {
-    draggedEl = null;
-})
+
 let knightX = 0;
 let knightY = 0;
 let flagX = 7;
@@ -24,18 +19,70 @@ const flag = document.createElement('div');
 flag.setAttribute('id', 'flag-div');
 flag.classList.add('default-field');
 flag.setAttribute('draggable', 'true');
-flag.addEventListener('dragstart', (event) => {
+
+// EVENT LISTENERS
+flag.addEventListener('dragstart', getDragEl);
+flag.addEventListener('dragend', dropEl);
+knight.addEventListener('dragstart', getDragEl);
+knight.addEventListener('dragend', dropEl);
+
+function getDragEl(){
     draggedEl = event.target;
-})
-flag.addEventListener('touchstart', (event) => {
-    draggedEl = event.target;
-})
-flag.addEventListener('dragend', () => {
+}
+function dropEl(){
     draggedEl = null;
-})
-flag.addEventListener('touchend', () => {
+}
+
+// MOBILE PHONE EVENT LISTENERS > Provided by good old pal chat gipity
+// TO-DO: Go through the code, understand the logic and learn how to do
+// drag and drop event listeners for mobile phone
+let startX = 0;
+let startY = 0;
+
+flag.addEventListener('touchstart', onTouchStart);
+knight.addEventListener('touchstart', onTouchStart);
+document.addEventListener('touchmove', onTouchMove, { passive: false });
+document.addEventListener('touchend', onTouchEnd);
+
+function onTouchStart(event) {
+    event.preventDefault();
+    const touch = event.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    getDragEl(event);
+}
+function onTouchMove(event) {
+    event.preventDefault();
+    if (draggedEl) {
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+        draggedEl.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    }
+}
+function onTouchEnd(event) {
+    if (draggedEl) {
+        draggedEl.style.transform = 'none';
+        const touch = event.changedTouches[0];
+        const targetField = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (targetField && targetField.classList.contains('default-field')) {
+            targetField.appendChild(draggedEl);
+            if (draggedEl === knight) {
+                knightX = targetField.getAttribute('x-cord');
+                knightY = targetField.getAttribute('y-cord');
+            } else if (draggedEl === flag) {
+                flagX = targetField.getAttribute('x-cord');
+                flagY = targetField.getAttribute('y-cord');
+            }
+            getPath();
+        }
+    }
     draggedEl = null;
-})
+}
+// \MOBILE PHONE EVENT LISTENERS
+
+
+
 let field;
 let draggedEl = null;
 let path;
@@ -60,16 +107,18 @@ for(let y = 7; y >= 0; y--){
         field.addEventListener('drop', (event) => {
             // const knight = document.getElementById('knight-div');
             event.preventDefault();
-            event.target.appendChild(draggedEl);
-            if(draggedEl === knight){
-                knightX = event.target.getAttribute('x-cord');
-                knightY = event.target.getAttribute('y-cord');
-                getPath();
-            }
-            if(draggedEl === flag){
-                flagX = event.target.getAttribute('x-cord');
-                flagY = event.target.getAttribute('y-cord');
-                getPath();
+            if (draggedEl) {
+                event.target.appendChild(draggedEl);
+                if(draggedEl === knight){
+                    knightX = event.target.getAttribute('x-cord');
+                    knightY = event.target.getAttribute('y-cord');
+                    getPath();
+                }
+                if(draggedEl === flag){
+                    flagX = event.target.getAttribute('x-cord');
+                    flagY = event.target.getAttribute('y-cord');
+                    getPath();
+                }
             }
 
         });
