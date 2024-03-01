@@ -74,8 +74,8 @@ body {
 }
 
 #chessboard{
-    width: 700px;
-    height: 700px;
+    width: 620px;
+    height: 620px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     border: 10px solid var(--border-color);
@@ -102,16 +102,16 @@ body {
     background-image: url(./img/knight-150x150px.svg);
     background-size: cover;
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 #flag-div{
     background-color: transparent;
     background-image: url(./img/flag.svg);
     background-size: cover;
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 .jump-field{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -122,16 +122,16 @@ body {
 
 @media screen and (max-width: 1100px){
     #knight-div{
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
     #flag-div{
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
     #chessboard{
-        width: 700px;
-        height: 700px;
+        width: 620px;
+        height: 620px;
     }
     .default-field{
         min-width: 60px;
